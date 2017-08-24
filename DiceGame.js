@@ -1,132 +1,148 @@
 
+
 function rollFourSidedDie(){
 	var determineDie = Math.floor((Math.random() * 4) + 1);
 	return determineDie;
 }	
 
-function pickNextDieToRoll(fourSidedResult) {
-    var offensiveStrategy = prompt("Attacker, how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+function pickNextDieToRoll(fourSidedResult, player2Name) {
+    var offensiveStrategy = prompt(player2Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
 	var potentialPoints;
 	
 	if (fourSidedResult === 1) {
-		console.log("Roll the Eight-Sided Die.");
-		potentialPoints = rollEightSidedDie();
+		console.log(player2Name+ ", roll the eight-sided die.");
+		potentialPoints = rollEightSidedDie(player2Name);
 	}
 	else if (fourSidedResult === 2) {
-		console.log("Roll the Ten-Sided Die.");
-		rollTenSidedDie();	
+		console.log(player2Name+ ", roll the ten-sided die.");
+		potentialPoints = rollTenSidedDie(player2Name);	
 		}
 	else if (fourSidedResult === 3) {
-		console.log("Roll the Twelve-Sided Die.");
-		rollTwelveSidedDie();
+		console.log(player2Name+ ", roll the twelve-sided die.");
+		potentialPoints = rollTwelveSidedDie(player2Name);
 	}
 	else if (fourSidedResult === 4) {
-		console.log("Roll the Twenty-Sided Die.");
-		rollTwentySidedDie();
+		console.log(player2Name+ ", roll the twenty-sided die.");
+		potentialPoints = rollTwentySidedDie(player2Name);
 	}	
-	
+	console.log("You rolled a "+ potentialPoints + ".");
 	return potentialPoints;
 }	
 	
-function rollEightSidedDie() {	
+function rollEightSidedDie(player2Name) {	
 	var spacesMoved = Math.floor((Math.random() * 8) + 1);
-	console.log("You advanced " + spacesMoved + " spaces.");
+	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	return spacesMoved;
+}
+	
+function rollTenSidedDie(player2Name) {
+
+	var spacesMoved = Math.floor((Math.random() * 10) + 1);
+	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
 	return spacesMoved;
 }
 
-		
-function rollTenSidedDie(playerLocation) {
-	var offensiveStrategy = prompt("Attacker, how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
-	var spacesMoved = Math.floor((Math.random() * 10) + 1);
-	playerLocation += spacesMoved;
-	console.log("You advanced " + spacesMoved + " spaces.");
-}
-
-function rollTwelveSidedDie() {
-	var offensiveStrategy = prompt("Attacker, how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+function rollTwelveSidedDie(player2Name) {
 	var spacesMoved = Math.floor((Math.random() * 12) + 1);		
-	playerLocation += spacesMoved;
-	console.log("You advanced " + spacesMoved + " spaces.");
+	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	return spacesMoved;
 }
 
-function rollTwentySidedDie() {
-	var offensiveStrategy = prompt("Attacker, how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+function rollTwentySidedDie(player2Name) {
 	var spacesMoved = Math.floor((Math.random() * 20) + 1);		
-	playerLocation += spacesMoved;
-	console.log("You advanced " + spacesMoved + " spaces.");
+	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	return spacesMoved;
 }		
 		
-function rollSixSidedDie() {
+function rollSixSidedDie(player1Name) {
 	var defensiveStrategy = Math.floor((Math.random() * 6) + 1);
 	
 	if (defensiveStrategy === 1 || defensiveStrategy === 2) {
-		console.log("Be clever!");
-		battles();
+		console.log(player1Name+ ", be clever!");
 	}
 	else if (defensiveStrategy === 3 || defensiveStrategy === 4) {
-		console.log("Be illusive!");
-		battles();
+		console.log(player1Name+ ", be illusive!");
 	}
 	else if (defensiveStrategy === 5 || defensiveStrategy === 6) {
-		console.log("Defend Yourself!");
-		battles();
+		console.log(player1Name+ ", defend Yourself!");
 	}
 }
 
-function battles() {
-	
+
+function battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, spacesMoved) {
+	var player2WinsRound;
+		
 	if (offensiveStrategy === 1 && (defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log("The trick failed! Great defense! Advance " + spacesMoved + " paces.");	//Defense advances
+		console.log(player1Name+ ", the trick failed! Great defense! Advance " + spacesMoved + " spaces.");	
+		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 1 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log("Gotcha! Nice trick attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", Nice trick attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 1 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log("Gotcha! Nice trick attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", Nice trick attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 2 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log("Nice hiding spot! Great defense! Advance " + spacesMoved + " paces.");	//Defense advances
+		console.log(player1Name+ ", nice hiding spot! Great defense! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 2 &&(defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log("Wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 2 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log("Wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
-	else if (offensiveStrategy === 3 &&(defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log("Relentless resilience! Great defense! Advance " + spacesMoved + " paces.");	 //Defense advances
+	else if (offensiveStrategy === 3 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
+		console.log(player1Name+ ", relentless resilience! Great defense! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 3 && (defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log("On guard! Smooth sword skills attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 3 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log("On guard! Smooth sword skills attacker! Advance " + spacesMoved + " paces.");
-		//attacker (x) {
+		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Advance " + spacesMoved + " spaces.");
+		player2WinsRound = true;
 	}
+	return player2WinsRound;
 }
 	
 function playGame(){
-	var scoreP1 = 0;
-	var scoreP2 = 0;
+	var player1Name = prompt ("What is your name?");
+	var player2Name = prompt ("What is your name?");
+	var player1Score = 0;
+	var player2Score = 0;
 	
-	var offensiveStrategy = prompt("Attacker, how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
-	var roll4Result = rollFourSidedDie();
-	var potentialPoints = pickNextDieToRoll(roll4Result);
-	
-	
-	// score += potentialPoints;
-	rollSixSidedDie();
+	while (player1Score < 50 || player2Score < 50) {
+		var offensiveStrategy = prompt(player2Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+		var offensiveStrategy = parseInt (offensiveStrategy);
+		var rollForResult = rollFourSidedDie();
+		var potentialPoints = pickNextDieToRoll(rollForResult, player2Name);
+		var defensiveStrategy = rollSixSidedDie(player1Name);
+		var defensiveStrategy = parseInt (defensiveStrategy);
+		var player2Won = battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, potentialPoints);
+		
+		if (player2Won === true) {
+			player2Score += potentialPoints;
+		}
+		else {
+			player1Score += potentialPoints;
+		} 
+		
+		if (player1Score >= 50) {
+		console.log(" " + player1Name + " Wins!");
+		}
+		else if (player2Score >= 50) {
+		console.log(" " + player2Name + " Wins! ");
+		}
+	}
 }
 
 playGame();
-	//finish game
-	//while loop
-	//create variable for taking turns via counter for even and odd
 	
 	
 	
