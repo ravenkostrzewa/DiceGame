@@ -6,7 +6,6 @@ function rollFourSidedDie(){
 }	
 
 function pickNextDieToRoll(fourSidedResult, player2Name) {
-    var offensiveStrategy = prompt(player2Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
 	var potentialPoints;
 	
 	if (fourSidedResult === 1) {
@@ -66,8 +65,8 @@ function rollSixSidedDie(player1Name) {
 	else if (defensiveStrategy === 5 || defensiveStrategy === 6) {
 		console.log(player1Name+ ", defend Yourself!");
 	}
+	return defensiveStrategy;
 }
-
 
 function battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, spacesMoved) {
 	var player2WinsRound;
@@ -116,22 +115,46 @@ function playGame(){
 	var player2Name = prompt ("What is your name?");
 	var player1Score = 0;
 	var player2Score = 0;
+	var isPlayer1Turn = true;
+	var offensiveStrategy;
+
 	
-	while (player1Score < 50 || player2Score < 50) {
-		var offensiveStrategy = prompt(player2Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
-		var offensiveStrategy = parseInt (offensiveStrategy);
-		var rollForResult = rollFourSidedDie();
-		var potentialPoints = pickNextDieToRoll(rollForResult, player2Name);
-		var defensiveStrategy = rollSixSidedDie(player1Name);
-		var defensiveStrategy = parseInt (defensiveStrategy);
-		var player2Won = battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, potentialPoints);
-		
-		if (player2Won === true) {
-			player2Score += potentialPoints;
+	while (player1Score < 50 && player2Score < 50) {
+		if (isPlayer1Turn) {
+			offensiveStrategy = prompt(player1Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+			while(offensiveStrategy !== "1" && offensiveStrategy !== "2" && offensiveStrategy !== "3") {
+				offensiveStrategy = prompt(player1Name + ", ummm... no. Enter 1, 2, or 3.");
+			}
+			offensiveStrategy = parseInt(offensiveStrategy);
+			var rollForResult = rollFourSidedDie();
+			var potentialPoints = pickNextDieToRoll(rollForResult, player1Name);
+			var defensiveStrategy = rollSixSidedDie(player2Name);
+			var defensiveStrategy = parseInt(defensiveStrategy);
+			var player2Won = battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, potentialPoints);
+			isPlayer1Turn = false;
 		}
 		else {
-			player1Score += potentialPoints;
+			offensiveStrategy = prompt(player2Name + ", how would you like to combat your opponent? Enter the corresponding number to choose your strategy: 1) trick, 2) trap, or 3) sword fight.");
+			while(offensiveStrategy !== "1" && offensiveStrategy !== "2" && offensiveStrategy !== "3") {
+				offensiveStrategy = prompt(player2Name + ", ummm... no. Enter 1, 2, or 3.");
+			}
+			offensiveStrategy = parseInt(offensiveStrategy);
+			var rollForResult = rollFourSidedDie();
+			var potentialPoints = pickNextDieToRoll(rollForResult, player2Name);
+			var defensiveStrategy = rollSixSidedDie(player1Name);
+			var defensiveStrategy = parseInt(defensiveStrategy);
+			var player2Won = battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name, potentialPoints);
+			isPlayer1Turn = true;
+		}
+		
+		if (player2Won === true) {
+		console.log(player2Score += potentialPoints);
+		}
+		else {
+		console.log(player1Score += potentialPoints);
 		} 
+		
+		console.log("Scoreboard:" + player1Name + player1Score + "vs." + player2Name + player2Score);
 		
 		if (player1Score >= 50) {
 		console.log(" " + player1Name + " Wins!");
@@ -139,7 +162,9 @@ function playGame(){
 		else if (player2Score >= 50) {
 		console.log(" " + player2Name + " Wins! ");
 		}
+		
 	}
+	console.log("Game Over");
 }
 
 playGame();
