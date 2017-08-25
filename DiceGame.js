@@ -30,26 +30,26 @@ function pickNextDieToRoll(fourSidedResult, player2Name) {
 	
 function rollEightSidedDie(player2Name) {	
 	var spacesMoved = Math.floor((Math.random() * 8) + 1);
-	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	console.log(player2Name+ ", you will gain " + spacesMoved + " moose if you can conquer your opponent.");
 	return spacesMoved;
 }
 	
 function rollTenSidedDie(player2Name) {
 
 	var spacesMoved = Math.floor((Math.random() * 10) + 1);
-	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	console.log(player2Name+ ", you will gain " + spacesMoved + " moose if you can conquer your opponent.");
 	return spacesMoved;
 }
 
 function rollTwelveSidedDie(player2Name) {
 	var spacesMoved = Math.floor((Math.random() * 12) + 1);		
-	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	console.log(player2Name+ ", you will gain " + spacesMoved + " moose if you can conquer your opponent.");
 	return spacesMoved;
 }
 
 function rollTwentySidedDie(player2Name) {
 	var spacesMoved = Math.floor((Math.random() * 20) + 1);		
-	console.log(player2Name+ ", you will advance " + spacesMoved + " spaces if you can conquer your opponent.");
+	console.log(player2Name+ ", you will gain " + spacesMoved + " moose if you can conquer your opponent.");
 	return spacesMoved;
 }		
 		
@@ -72,47 +72,47 @@ function battles(offensiveStrategy, defensiveStrategy, player1Name, player2Name,
 	var player2WinsRound;
 		
 	if (offensiveStrategy === 1 && (defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log(player1Name+ ", the trick failed! Great defense! Advance " + spacesMoved + " spaces.");	
+		console.log(player1Name+ ", the trick failed! Great defense! Gain " + spacesMoved + " moose.");	
 		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 1 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log(player2Name+ ", Nice trick attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", Nice trick attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 1 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log(player2Name+ ", Nice trick attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", Nice trick attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 2 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log(player1Name+ ", nice hiding spot! Great defense! Advance " + spacesMoved + " spaces.");
+		console.log(player1Name+ ", nice hiding spot! Great defense! Gain " + spacesMoved + " moose.");
 		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 2 &&(defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 2 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", wow! They fell for that?! Nice trap attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 3 && (defensiveStrategy === 5 || defensiveStrategy === 6)) {
-		console.log(player1Name+ ", relentless resilience! Great defense! Advance " + spacesMoved + " spaces.");
+		console.log(player1Name+ ", relentless resilience! Great defense! Gain " + spacesMoved + " moose.");
 		player2WinsRound = false;
 	}
 	else if (offensiveStrategy === 3 && (defensiveStrategy === 1 || defensiveStrategy === 2)) {
-		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	else if (offensiveStrategy === 3 && (defensiveStrategy === 3 || defensiveStrategy === 4)) {
-		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Advance " + spacesMoved + " spaces.");
+		console.log(player2Name+ ", on guard! Smooth sword skills attacker! Gain " + spacesMoved + " moose.");
 		player2WinsRound = true;
 	}
 	return player2WinsRound;
 }
 	
 function playGame(){
-	var player1Name = prompt ("What is your name?");
-	var player2Name = prompt ("What is your name?");
+	var player1Name = prompt ("Be the first to catch 50 moose! What is your name?");
+	var player2Name = prompt ("Catch 50 moose before your opponent can! What is your name?");
 	var player1Score = 0;
 	var player2Score = 0;
 	var isPlayer1Turn = true;
